@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RegEx Engine — Home</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-icon"><span class="nav-icon-text">RE</span></div>RegexEngine</a>
+  <div class="nav-links">
+    <a href="index.html"  class="nav-btn act">Home</a>
+    <a href="engine.html" class="nav-btn">Engine</a>
+    <a href="about.html"  class="nav-btn">About</a>
+  </div>
+  <div class="nav-right"><span class="nav-tag">COMPILER DESIGN · DIV 6A</span></div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="wrap">
+  <div class="hero-wrap">
+    <div>
+      <div class="hero-eyebrow ad"><span class="eyebrow-dot"></span>COMPILER DESIGN — PHASE 1 SUBMISSION</div>
+      <h1 class="hero-title ad d1"><span class="t1">Regex</span><br/><span class="t2">Engine</span><br/><span class="t3">from Scratch</span></h1>
+      <p class="hero-desc ad d2">A complete Regular Expression Engine built from the ground up — implementing every phase of compiler theory from Lexical Analysis all the way through DFA Minimization using Hopcroft's Algorithm.</p>
+      <div class="hero-actions ad d3">
+        <a href="engine.html" class="btn btn-teal">▶ &nbsp;Launch Engine</a>
+        <a href="about.html"  class="btn btn-ghost">About Project</a>
+      </div>
+      <div class="pipe-row ad d4">
+        <div class="pipe-pill" style="background:var(--tealbg);color:var(--teal3)"><span style="font-family:var(--mono);font-size:9px;background:var(--teal);color:#fff;padding:1px 5px;border-radius:3px">01</span>LEXER</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-pill" style="background:var(--bluebg);color:var(--blue3)"><span style="font-family:var(--mono);font-size:9px;background:var(--blue);color:#fff;padding:1px 5px;border-radius:3px">02</span>PARSER</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-pill" style="background:var(--amberbg);color:var(--amber3)"><span style="font-family:var(--mono);font-size:9px;background:var(--amber);color:#fff;padding:1px 5px;border-radius:3px">03</span>NFA</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-pill" style="background:var(--rosebg);color:var(--rose3)"><span style="font-family:var(--mono);font-size:9px;background:var(--rose);color:#fff;padding:1px 5px;border-radius:3px">04</span>DFA</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-pill" style="background:var(--violetbg);color:var(--violet3)"><span style="font-family:var(--mono);font-size:9px;background:var(--violet);color:#fff;padding:1px 5px;border-radius:3px">05</span>MIN-DFA</div>
+      </div>
+    </div>
+    <div class="hero-terminal ad d2">
+      <div class="term-bar">
+        <div class="term-dot" style="background:#ff5f57"></div>
+        <div class="term-dot" style="background:#febc2e"></div>
+        <div class="term-dot" style="background:#28c840"></div>
+        <span class="term-title">compiler_pipeline.js</span>
+      </div>
+      <div class="term-body">
+        <div class="tl"><div class="tl-step" style="background:var(--tealbg);color:var(--teal3)">1</div><span class="tl-name" style="color:var(--teal3)">Lexer</span><span style="color:var(--muted);margin:0 8px">—</span><span class="tl-algo">Tokenization</span></div>
+        <div class="tl-sep"></div>
+        <div class="tl"><div class="tl-step" style="background:var(--bluebg);color:var(--blue3)">2</div><span class="tl-name" style="color:var(--blue3)">Parser / AST</span><span style="color:var(--muted);margin:0 8px">—</span><span class="tl-algo">Recursive Descent</span></div>
+        <div class="tl-sep"></div>
+        <div class="tl"><div class="tl-step" style="background:var(--amberbg);color:var(--amber3)">3</div><span class="tl-name" style="color:var(--amber3)">NFA Builder</span><span style="color:var(--muted);margin:0 8px">—</span><span class="tl-algo">Thompson's Construction</span></div>
+        <div class="tl-sep"></div>
+        <div class="tl"><div class="tl-step" style="background:var(--rosebg);color:var(--rose3)">4</div><span class="tl-name" style="color:var(--rose3)">DFA Converter</span><span style="color:var(--muted);margin:0 8px">—</span><span class="tl-algo">Subset Construction</span></div>
+        <div class="tl-sep"></div>
+        <div class="tl"><div class="tl-step" style="background:var(--violetbg);color:var(--violet3)">5</div><span class="tl-name" style="color:var(--violet3)">DFA Minimization</span><span style="color:var(--muted);margin:0 8px">—</span><span class="tl-algo">Hopcroft's Algorithm</span></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="home-features"><div class="wrap">
+    <div class="sec-tag">PHASES</div>
+    <div class="sec-head">Five Compiler <em>Phases</em></div>
+    <p class="sec-sub">Each phase maps directly to a core compiler design concept.</p>
+    <div class="feat-grid">
+      <div class="feat-card ar d1" style="--cl:var(--teal2)"><div class="feat-step">PHASE 01</div><div class="feat-icon">🔤</div><div class="feat-name">Lexer — Tokenization</div><div class="feat-desc">Reads the regex pattern character by character. Classifies each as CHAR, STAR, PLUS, QUES, OR, LPAREN, RPAREN, or DOT.</div><div class="feat-chip" style="background:var(--tealbg);color:var(--teal3)">LEXICAL ANALYSIS</div></div>
+      <div class="feat-card ar d2" style="--cl:var(--blue2)"><div class="feat-step">PHASE 02</div><div class="feat-icon">🌳</div><div class="feat-name">Parser — AST</div><div class="feat-desc">Recursive Descent Parser builds an Abstract Syntax Tree. Handles operator precedence: quantifiers > concatenation > alternation.</div><div class="feat-chip" style="background:var(--bluebg);color:var(--blue3)">RECURSIVE DESCENT</div></div>
+      <div class="feat-card ar d3" style="--cl:var(--amber2)"><div class="feat-step">PHASE 03</div><div class="feat-icon">🔀</div><div class="feat-name">NFA — Thompson's</div><div class="feat-desc">Thompson's Construction converts each AST node into an NFA fragment via ε-transitions. Produces single start and accept state.</div><div class="feat-chip" style="background:var(--amberbg);color:var(--amber3)">THOMPSON'S ALGO</div></div>
+      <div class="feat-card ar d4" style="--cl:var(--rose2)"><div class="feat-step">PHASE 04</div><div class="feat-icon">📊</div><div class="feat-name">DFA — Subset Construction</div><div class="feat-desc">Converts NFA to a Deterministic Finite Automaton. Computes ε-closures for every reachable state set using powerset construction.</div><div class="feat-chip" style="background:var(--rosebg);color:var(--rose3)">SUBSET CONSTRUCTION</div></div>
+      <div class="feat-card ar d5" style="--cl:var(--violet2);border-color:rgba(124,58,237,.25)"><div class="feat-step">PHASE 05</div><div class="feat-icon">✂️</div><div class="feat-name">DFA Minimization</div><div class="feat-desc">Hopcroft's Algorithm merges equivalent states by partitioning them into distinguishable groups. Produces smallest possible DFA.</div><div class="feat-chip" style="background:var(--violetbg);color:var(--violet3)">HOPCROFT'S ALGO</div></div>
+      <div class="feat-card ar d6" style="--cl:var(--teal2)"><div class="feat-step">BONUS</div><div class="feat-icon">⚡</div><div class="feat-name">Visual Graphs</div><div class="feat-desc">NFA, DFA and Minimized DFA are drawn as state diagrams — circles, arrows, accept states — so your professor can verify correctness.</div><div class="feat-chip" style="background:var(--tealbg);color:var(--teal3)">CANVAS DIAGRAMS</div></div>
+    </div>
+  </div></div>
+
+  <!-- CONCEPTS -->
+  <div class="home-concepts"><div class="wrap">
+    <div class="sec-tag">TOPICS</div>
+    <div class="sec-head">Compiler <em>Concepts Covered</em></div>
+    <div class="concept-cloud ar">
+      <span class="concept-tag"><span class="n">01</span>Regular Expressions</span>
+      <span class="concept-tag"><span class="n">02</span>Lexical Analysis</span>
+      <span class="concept-tag"><span class="n">03</span>Tokenization</span>
+      <span class="concept-tag"><span class="n">04</span>Recursive Descent Parsing</span>
+      <span class="concept-tag"><span class="n">05</span>Abstract Syntax Tree</span>
+      <span class="concept-tag"><span class="n">06</span>Operator Precedence</span>
+      <span class="concept-tag"><span class="n">07</span>NFA Construction</span>
+      <span class="concept-tag"><span class="n">08</span>Thompson's Construction</span>
+      <span class="concept-tag"><span class="n">09</span>ε-Transitions</span>
+      <span class="concept-tag"><span class="n">10</span>ε-Closure</span>
+      <span class="concept-tag"><span class="n">11</span>DFA Conversion</span>
+      <span class="concept-tag"><span class="n">12</span>Subset Construction</span>
+      <span class="concept-tag"><span class="n">13</span>State Machines</span>
+      <span class="concept-tag"><span class="n">14</span>DFA Minimization</span>
+      <span class="concept-tag"><span class="n">15</span>Hopcroft's Algorithm</span>
+      <span class="concept-tag"><span class="n">16</span>Equivalent States</span>
+    </div>
+  </div></div>
+
+  <!-- STATS -->
+  <div class="home-stats"><div class="wrap">
+    <div class="stat-row ar">
+      <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">COMPILER PHASES</div></div>
+      <div class="stat-box"><div class="stat-val">16</div><div class="stat-lbl">CONCEPTS COVERED</div></div>
+      <div class="stat-box"><div class="stat-val">0</div><div class="stat-lbl">DEPENDENCIES</div></div>
+    </div>
+  </div></div>
+
+  <!-- CTA -->
+  <div class="home-cta"><div class="wrap">
+    <div class="cta-inner ar">
+      <div class="cta-text">
+        <h2>See It <em>Running Live</em></h2>
+        <p>Type any regex — watch all 5 phases run with full state diagrams and visual graphs.</p>
+      </div>
+      <div class="cta-btns">
+        <a href="engine.html" class="btn btn-teal" style="font-size:15px;padding:13px 32px">▶ &nbsp;Open Engine</a>
+        <a href="about.html"  class="btn btn-ghost">About</a>
+      </div>
+    </div>
+  </div></div>
+
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

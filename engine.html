@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RegEx Engine — Engine</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-icon"><span class="nav-icon-text">RE</span></div>RegexEngine</a>
+  <div class="nav-links">
+    <a href="index.html"  class="nav-btn">Home</a>
+    <a href="engine.html" class="nav-btn act">Engine</a>
+    <a href="about.html"  class="nav-btn">About</a>
+  </div>
+  <div class="nav-right"><span class="nav-tag">COMPILER DESIGN · DIV 6A</span></div>
+</nav>
+
+<div class="page-wrap">
+<div class="wrap">
+
+  <div class="eng-header">
+    <h1>Regex <em>Engine</em></h1>
+    <p>Enter a regex pattern — all 5 phases run automatically + visual state diagrams drawn below</p>
+  </div>
+
+  <!-- INPUT BAR -->
+  <div class="inp-bar">
+    <div class="inp-top">
+      <span class="inp-label">PATTERN</span>
+      <input class="inp-field" id="patIn" type="text" value="a(b|c)*d" spellcheck="false" placeholder="Enter regex pattern…"/>
+      <div class="inp-actions">
+        <button class="btn btn-teal" onclick="go()">▶ Run</button>
+        <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+    <div class="ex-strip">
+      <span class="ex-lbl">TRY:</span>
+      <span class="ex-chip" onclick="load('a(b|c)*d')">a(b|c)*d</span>
+      <span class="ex-chip" onclick="load('a+b')">a+b</span>
+      <span class="ex-chip" onclick="load('(ab)+')"> (ab)+</span>
+      <span class="ex-chip" onclick="load('a?b')">a?b</span>
+      <span class="ex-chip" onclick="load('a.c')">a.c</span>
+      <span class="ex-chip" onclick="load('(a|b)*c')">(a|b)*c</span>
+    </div>
+  </div>
+
+  <!-- PIPELINE PROGRESS BAR -->
+  <div class="prog-bar">
+    <div class="prog-step" id="ps1">01 · LEXER</div><div class="prog-arr">→</div>
+    <div class="prog-step" id="ps2">02 · PARSER</div><div class="prog-arr">→</div>
+    <div class="prog-step" id="ps3">03 · NFA</div><div class="prog-arr">→</div>
+    <div class="prog-step" id="ps4">04 · DFA</div><div class="prog-arr">→</div>
+    <div class="prog-step" id="ps5">05 · MIN-DFA</div>
+  </div>
+
+  <!-- 5 PHASE PANELS -->
+  <div class="phases-grid">
+    <div class="phase-panel pp1">
+      <div class="pp-head"><div class="pp-badge">PHASE 01</div><div class="pp-title">Lexer</div><div class="pp-sub">Token Stream</div></div>
+      <div class="pp-body" id="o-tok"><div class="empty-ph"><div class="ei">⚡</div><div class="et">AWAITING</div></div></div>
+    </div>
+    <div class="phase-panel pp2">
+      <div class="pp-head"><div class="pp-badge">PHASE 02</div><div class="pp-title">Parser</div><div class="pp-sub">Abstract Syntax Tree</div></div>
+      <div class="pp-body" id="o-ast"><div class="empty-ph"><div class="ei">🌳</div><div class="et">AWAITING</div></div></div>
+    </div>
+    <div class="phase-panel pp3">
+      <div class="pp-head"><div class="pp-badge">PHASE 03</div><div class="pp-title">NFA Builder</div><div class="pp-sub">Thompson's Construction</div></div>
+      <div class="pp-body" id="o-nfa"><div class="empty-ph"><div class="ei">🔀</div><div class="et">AWAITING</div></div></div>
+    </div>
+    <div class="phase-panel pp4">
+      <div class="pp-head"><div class="pp-badge">PHASE 04</div><div class="pp-title">DFA Converter</div><div class="pp-sub">Subset Construction</div></div>
+      <div class="pp-body" id="o-dfa"><div class="empty-ph"><div class="ei">📊</div><div class="et">AWAITING</div></div></div>
+    </div>
+    <div class="phase-panel pp5">
+      <div class="pp-head"><div class="pp-badge">PHASE 05</div><div class="pp-title">DFA Minimization</div><div class="pp-sub">Hopcroft's Algorithm</div></div>
+      <div class="pp-body" id="o-min"><div class="empty-ph"><div class="ei">✂️</div><div class="et">AWAITING</div></div></div>
+    </div>
+  </div>
+
+  <!-- VISUAL GRAPH DIAGRAMS -->
+  <div class="graph-section">
+    <div style="margin-bottom:16px;">
+      <div class="sec-tag">VISUAL DIAGRAMS</div>
+      <div class="sec-head">State <em>Graph Diagrams</em></div>
+      <p class="sec-sub" style="margin-top:4px;">Visual state diagrams — single circle = state &nbsp;|&nbsp; double circle = accept state &nbsp;|&nbsp; dashed arrow = ε-transition</p>
+    </div>
+    <div class="graph-grid">
+
+      <!-- NFA GRAPH -->
+      <div class="graph-card">
+        <div class="graph-head">
+          <div class="graph-badge gb-nfa">PHASE 03</div>
+          <span class="graph-title">NFA Graph</span>
+          <span class="graph-sub">Thompson's Construction</span>
+        </div>
+        <div class="graph-canvas-wrap">
+          <canvas class="graph-cv" id="cv-nfa"></canvas>
+          <div class="empty-ph" id="eg-nfa" style="position:absolute;inset:0;display:flex;">
+            <div class="ei">🔀</div><div class="et">RUN ENGINE FIRST</div>
+          </div>
+        </div>
+        <div class="graph-legend">
+          <div class="gl-item"><div class="gl-dot" style="background:#5eead4"></div>Normal State</div>
+          <div class="gl-item"><div class="gl-dot" style="background:transparent;border:3px solid #6ee7b7"></div>Accept State</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#fcd34d;border-radius:0;width:18px;height:2px;margin:4px 0"></div>ε-transition</div>
+        </div>
+      </div>
+
+      <!-- DFA GRAPH -->
+      <div class="graph-card">
+        <div class="graph-head">
+          <div class="graph-badge gb-dfa">PHASE 04</div>
+          <span class="graph-title">DFA Graph</span>
+          <span class="graph-sub">Subset Construction</span>
+        </div>
+        <div class="graph-canvas-wrap">
+          <canvas class="graph-cv" id="cv-dfa"></canvas>
+          <div class="empty-ph" id="eg-dfa" style="position:absolute;inset:0;display:flex;">
+            <div class="ei">📊</div><div class="et">RUN ENGINE FIRST</div>
+          </div>
+        </div>
+        <div class="graph-legend">
+          <div class="gl-item"><div class="gl-dot" style="background:#fda4af"></div>DFA State</div>
+          <div class="gl-item"><div class="gl-dot" style="background:transparent;border:3px solid #6ee7b7"></div>Accept State</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#93c5fd;border-radius:0;width:18px;height:2px;margin:4px 0"></div>Start →</div>
+        </div>
+      </div>
+
+      <!-- MIN DFA GRAPH -->
+      <div class="graph-card">
+        <div class="graph-head">
+          <div class="graph-badge gb-min">PHASE 05</div>
+          <span class="graph-title">Minimized DFA Graph</span>
+          <span class="graph-sub">Hopcroft's Algorithm</span>
+        </div>
+        <div class="graph-canvas-wrap">
+          <canvas class="graph-cv" id="cv-min"></canvas>
+          <div class="empty-ph" id="eg-min" style="position:absolute;inset:0;display:flex;">
+            <div class="ei">✂️</div><div class="et">RUN ENGINE FIRST</div>
+          </div>
+        </div>
+        <div class="graph-legend">
+          <div class="gl-item"><div class="gl-dot" style="background:#c4b5fd"></div>Min State</div>
+          <div class="gl-item"><div class="gl-dot" style="background:transparent;border:3px solid #6ee7b7"></div>Accept State</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#6ee7b7;border-radius:2px;width:14px;height:8px"></div>Merged</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script src="engine.js"></script>
+<script src="nav.js"></script>
+<script>
+function setStep(n) {
+  for (let i=1;i<=5;i++) {
+    const el=document.getElementById('ps'+i);
+    if      (i<n)  el.className='prog-step done';
+    else if (i===n) el.className='prog-step active';
+    else            el.className='prog-step';
+  }
+}
+function clearAll() {
+  [['o-tok','⚡'],['o-ast','🌳'],['o-nfa','🔀'],['o-dfa','📊'],['o-min','✂️']].forEach(([id,ic])=>
+    document.getElementById(id).innerHTML=`<div class="empty-ph"><div class="ei">${ic}</div><div class="et">AWAITING</div></div>`
+  );
+  for (let i=1;i<=5;i++) document.getElementById('ps'+i).className='prog-step';
+  ['eg-nfa','eg-dfa','eg-min'].forEach(id=>document.getElementById(id).style.display='flex');
+}
+function load(p) { document.getElementById('patIn').value=p; go(); }
+function go() {
+  const pat=document.getElementById('patIn').value.trim();
+  if (!pat) return;
+  clearAll();
+  try {
+    let d=0;
+    [1,2,3,4,5].forEach(n=>{ setTimeout(()=>setStep(n),d); d+=110; });
+    setTimeout(()=>{ for(let i=1;i<=5;i++) document.getElementById('ps'+i).className='prog-step done'; }, d);
+    const {tokens,ast,nfa,nfaInfo,alpha,dfa,min} = runEngine(pat);
+    document.getElementById('o-tok').innerHTML = renderTokens(tokens,pat);
+    document.getElementById('o-ast').innerHTML = renderAST(ast,pat);
+    document.getElementById('o-nfa').innerHTML = renderNFA(nfa,nfaInfo);
+    document.getElementById('o-dfa').innerHTML = renderDFA(dfa,alpha);
+    document.getElementById('o-min').innerHTML = renderMin(min,dfa);
+    // Draw visual graphs after DOM updates
+    setTimeout(()=>drawAllGraphs(nfa,nfaInfo,dfa,min), 120);
+  } catch(e) {
+    document.getElementById('o-tok').innerHTML=`<div style="color:#fda4af;font-size:11px">⚠ Error: ${esc(e.message)}</div>`;
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('patIn').addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+});
+</script>
+</body>
+</html>

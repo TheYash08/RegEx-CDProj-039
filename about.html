@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RegEx Engine — About</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-icon"><span class="nav-icon-text">RE</span></div>RegexEngine</a>
+  <div class="nav-links">
+    <a href="index.html"  class="nav-btn">Home</a>
+    <a href="engine.html" class="nav-btn">Engine</a>
+    <a href="about.html"  class="nav-btn act">About</a>
+  </div>
+  <div class="nav-right"><span class="nav-tag">COMPILER DESIGN · DIV 6A</span></div>
+</nav>
+
+<div class="page-wrap">
+<div class="wrap">
+
+  <!-- ABOUT HERO -->
+  <div class="about-hero">
+    <div>
+      <div class="sec-tag">ABOUT</div>
+      <h1 class="ah-title">Regex Engine <em>from Scratch</em></h1>
+      <p class="ah-desc">A complete Regular Expression Engine implementing all five phases of compiler theory — from Lexical Analysis all the way to DFA Minimization — built entirely in vanilla JavaScript with zero dependencies. Includes visual state diagrams for NFA, DFA and Minimized DFA.</p>
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-key">SUBJECT</div><div class="meta-val">Compiler Design</div></div>
+        <div class="meta-item"><div class="meta-key">DIVISION</div><div class="meta-val">6A</div></div>
+        <div class="meta-item"><div class="meta-key">SUBMISSION</div><div class="meta-val">Phase 1 — March Week 2</div></div>
+        <div class="meta-item"><div class="meta-key">DEPENDENCIES</div><div class="meta-val">Zero</div></div>
+      </div>
+    </div>
+    <div class="pipeline-visual">
+      <div class="pv-head">// COMPILER PIPELINE</div>
+      <div class="pv-body">
+        <div class="pv-step"><div class="pv-num" style="background:var(--tealbg);color:var(--teal3)">1</div><div><div class="pv-name" style="color:var(--teal3)">Lexer</div><div class="pv-algo">Tokenization</div></div></div>
+        <div class="pv-step"><div class="pv-num" style="background:var(--bluebg);color:var(--blue3)">2</div><div><div class="pv-name" style="color:var(--blue3)">Parser / AST</div><div class="pv-algo">Recursive Descent Parsing</div></div></div>
+        <div class="pv-step"><div class="pv-num" style="background:var(--amberbg);color:var(--amber3)">3</div><div><div class="pv-name" style="color:var(--amber3)">NFA Builder</div><div class="pv-algo">Thompson's Construction</div></div></div>
+        <div class="pv-step"><div class="pv-num" style="background:var(--rosebg);color:var(--rose3)">4</div><div><div class="pv-name" style="color:var(--rose3)">DFA Converter</div><div class="pv-algo">Subset Construction Algorithm</div></div></div>
+        <div class="pv-step"><div class="pv-num" style="background:var(--violetbg);color:var(--violet3)">5</div><div><div class="pv-name" style="color:var(--violet3)">DFA Minimization</div><div class="pv-algo">Hopcroft's Algorithm</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE BREAKDOWN -->
+  <div class="sec-tag">PHASES</div>
+  <div class="sec-head" style="margin-bottom:24px">Each <em>Phase</em> Explained</div>
+
+  <div class="ph-card">
+    <div class="ph-num" style="background:var(--tealbg);color:var(--teal3)">1</div>
+    <div><h3>Lexer — Tokenization</h3><div class="algo">LEXICAL ANALYSIS</div>
+    <p>The Lexer reads the regex pattern character by character and converts it into a typed token stream. Each character is classified: CHAR, STAR (*), PLUS (+), QUES (?), OR (|), LPAREN, RPAREN, DOT (.). This is the first phase of every compiler.</p>
+    <div class="tag-row"><span class="ctag" style="background:var(--tealbg);color:var(--teal3)">Regular Expressions</span><span class="ctag" style="background:var(--tealbg);color:var(--teal3)">Tokenization</span><span class="ctag" style="background:var(--tealbg);color:var(--teal3)">Lexical Analysis</span><span class="ctag" style="background:var(--tealbg);color:var(--teal3)">Character Scanning</span></div>
+    </div>
+  </div>
+
+  <div class="ph-card">
+    <div class="ph-num" style="background:var(--bluebg);color:var(--blue3)">2</div>
+    <div><h3>Parser — Abstract Syntax Tree</h3><div class="algo">SYNTAX ANALYSIS · RECURSIVE DESCENT</div>
+    <p>The Parser builds an AST using Recursive Descent Parsing. Operator precedence: quantifiers (*, +, ?) bind tightest, then concatenation, then alternation (|). Explicit CONCAT tokens are inserted between adjacent operands before parsing begins.</p>
+    <div class="tag-row"><span class="ctag" style="background:var(--bluebg);color:var(--blue3)">Recursive Descent</span><span class="ctag" style="background:var(--bluebg);color:var(--blue3)">Abstract Syntax Tree</span><span class="ctag" style="background:var(--bluebg);color:var(--blue3)">Operator Precedence</span><span class="ctag" style="background:var(--bluebg);color:var(--blue3)">CFG</span></div>
+    </div>
+  </div>
+
+  <div class="ph-card">
+    <div class="ph-num" style="background:var(--amberbg);color:var(--amber3)">3</div>
+    <div><h3>NFA Builder — Thompson's Construction</h3><div class="algo">NON-DETERMINISTIC FINITE AUTOMATON · VISUAL GRAPH</div>
+    <p>Thompson's Construction recursively converts each AST node into a small NFA fragment joined via ε-transitions. Each operator has its own NFA construction pattern. The result has exactly one start and one accept state. A visual graph diagram is drawn showing all states and transitions.</p>
+    <div class="tag-row"><span class="ctag" style="background:var(--amberbg);color:var(--amber3)">Thompson's Construction</span><span class="ctag" style="background:var(--amberbg);color:var(--amber3)">NFA</span><span class="ctag" style="background:var(--amberbg);color:var(--amber3)">ε-Transitions</span><span class="ctag" style="background:var(--amberbg);color:var(--amber3)">State Diagrams</span></div>
+    </div>
+  </div>
+
+  <div class="ph-card">
+    <div class="ph-num" style="background:var(--rosebg);color:var(--rose3)">4</div>
+    <div><h3>DFA Converter — Subset Construction</h3><div class="algo">DETERMINISTIC FINITE AUTOMATON · VISUAL GRAPH</div>
+    <p>Subset Construction converts the NFA to a DFA. Each DFA state represents a set of NFA states reachable via ε-closure. A DFA state is accepting if any of its NFA states are accepting. A visual graph is drawn showing the deterministic automaton.</p>
+    <div class="tag-row"><span class="ctag" style="background:var(--rosebg);color:var(--rose3)">Subset Construction</span><span class="ctag" style="background:var(--rosebg);color:var(--rose3)">DFA</span><span class="ctag" style="background:var(--rosebg);color:var(--rose3)">ε-Closure</span><span class="ctag" style="background:var(--rosebg);color:var(--rose3)">Powerset Construction</span></div>
+    </div>
+  </div>
+
+  <div class="ph-card" style="border-color:rgba(124,58,237,.3)">
+    <div class="ph-num" style="background:var(--violetbg);color:var(--violet3)">5</div>
+    <div><h3>DFA Minimization — Hopcroft's Algorithm</h3><div class="algo">STATE MINIMIZATION · EQUIVALENCE PARTITIONING · VISUAL GRAPH</div>
+    <p>Hopcroft's Algorithm minimizes the DFA by partitioning states into equivalence classes. States that cannot be distinguished by any input string are merged. The result is the smallest DFA accepting the same language. A visual graph shows the minimized automaton with merged state labels.</p>
+    <div class="tag-row"><span class="ctag" style="background:var(--violetbg);color:var(--violet3)">DFA Minimization</span><span class="ctag" style="background:var(--violetbg);color:var(--violet3)">Hopcroft's Algorithm</span><span class="ctag" style="background:var(--violetbg);color:var(--violet3)">Equivalent States</span><span class="ctag" style="background:var(--violetbg);color:var(--violet3)">State Partitioning</span><span class="ctag" style="background:var(--violetbg);color:var(--violet3)">Minimal Automaton</span></div>
+    </div>
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="sec-tag" style="margin-top:36px">TECHNOLOGY</div>
+  <div class="sec-head" style="margin-bottom:22px">Tech <em>Stack</em></div>
+  <div class="tech-grid">
+    <div class="tech-card"><div class="tech-ic">🌐</div><div class="tech-nm">HTML5</div><div class="tech-ds">Markup</div></div>
+    <div class="tech-card"><div class="tech-ic">🎨</div><div class="tech-nm">CSS3</div><div class="tech-ds">Styling</div></div>
+    <div class="tech-card"><div class="tech-ic">⚡</div><div class="tech-nm">Vanilla JS</div><div class="tech-ds">Engine Logic</div></div>
+    <div class="tech-card"><div class="tech-ic">🎨</div><div class="tech-nm">Canvas API</div><div class="tech-ds">Graph Drawing</div></div>
+    <div class="tech-card"><div class="tech-ic">📦</div><div class="tech-nm">0 Libraries</div><div class="tech-ds">No Dependencies</div></div>
+    <div class="tech-card"><div class="tech-ic">🖥️</div><div class="tech-nm">Browser App</div><div class="tech-ds">No Install</div></div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="sec-tag">REFERENCES</div>
+  <div class="sec-head" style="margin-bottom:22px">Academic <em>References</em></div>
+  <div class="card" style="background:var(--surface)">
+    <ul class="ref-list">
+      <li><span class="ref-n">[1]</span><span>Aho, Lam, Sethi, Ullman</span> — Compilers: Principles, Techniques, and Tools (Dragon Book), 2nd Edition</li>
+      <li><span class="ref-n">[2]</span><span>Thompson, K. (1968)</span> — Programming Techniques: Regular expression search algorithm, Communications of the ACM</li>
+      <li><span class="ref-n">[3]</span><span>Hopcroft, J. (1971)</span> — An n log n Algorithm for Minimizing States in a Finite Automaton, Stanford University</li>
+      <li><span class="ref-n">[4]</span><span>Sipser, M.</span> — Introduction to the Theory of Computation, 3rd Edition</li>
+      <li><span class="ref-n">[5]</span><span>Hopcroft, Motwani, Ullman</span> — Introduction to Automata Theory, Languages, and Computation</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>
