@@ -1,6 +1,6 @@
 # ⚙️ Regex Engine from Scratch
 
-> **Compiler Design — Phase 1 Submission | Division 6A | March Week 2**
+> **Compiler Design — Krish Patel (202303103510039)**
 
 A complete **Regular Expression Engine** built from the ground up using vanilla HTML, CSS, and JavaScript — implementing all five phases of compiler theory with live visualization and visual state graph diagrams.
 
